@@ -1,0 +1,53 @@
+:root {
+  --fg: #222;
+  --muted: #666;
+  --link: #1a5fb4;
+  --rule: #ddd;
+}
+
+html {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.6;
+  color: var(--fg);
+}
+
+body {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.site-header a {
+  text-decoration: none;
+  color: var(--fg);
+  font-size: 1.1rem;
+}
+
+a {
+  color: var(--link);
+}
+
+h1, h2, h3 {
+  line-height: 1.25;
+}
+
+code {
+  background: #f2f2f2;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+  font-size: 0.95em;
+}
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 3rem;
+  padding-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}

@@ -1,0 +1,26 @@
+{
+  // Cloudflare Workers configuration.
+  // Deploy with:  ./deploy.sh   (or `wrangler deploy`)
+  // Docs:         https://developers.cloudflare.com/workers/wrangler/configuration/
+  //
+  // This is a pure static site: there is no Worker script, only assets.
+  // `./build.sh` renders the blog into the sibling ../blog-site directory.
+
+  "name": "pollen-blog",
+  "compatibility_date": "2026-09-01",
+
+  // Serve only on the custom domain below (no workers.dev subdomain).
+  "workers_dev": false,
+
+  // Vanity domain. This zone lives in the same account as the Worker, so
+  // Cloudflare creates the DNS record and TLS certificate automatically.
+  "routes": [
+    { "pattern": "blog.drewmyers.dev", "custom_domain": true, "zone_name": "drewmyers.dev" }
+  ],
+
+  "assets": {
+    "directory": "../blog-site",
+    // Serve clean URLs (/post) and redirect /post.html -> /post.
+    "html_handling": "auto-trailing-slash"
+  }
+}

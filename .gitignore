@@ -1,0 +1,10 @@
+# Project-local Racket package scope created by the dev shell
+/.racket/
+
+# Wrangler local state (auth cache, build output)
+/.wrangler/
+
+# Pollen build artifacts. Your sources are the .pm / .p / .css files.
+# Use `raco pollen publish` to produce a deployable copy without sources.
+/compiled/
+/*.html
