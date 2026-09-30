@@ -33,8 +33,10 @@ clean_rendered_html() {
 }
 
 # -s renders subdirectories (posts/) while keeping the project root fixed, so
-# the shared template.html.p still applies to them.
-run raco pollen render -s .
+# the shared template.html.p still applies to them. -f forces a re-render so
+# the generated index picks up added/removed posts (the index source itself
+# doesn't change, so the cache would otherwise reuse stale output).
+run raco pollen render -f -s .
 run raco pollen publish . "$site"
 clean_rendered_html
 
