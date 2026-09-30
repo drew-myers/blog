@@ -10,8 +10,20 @@
 set -euo pipefail
 cd "$(cd "$(dirname "$0")" && pwd)"
 
-cleanup() { rm -f ./*.html; }
-trap cleanup EXIT INT TERM
+# Delete the in-tree HTML rendered from each Pollen source (root + subdirs).
+# Only strips the source's own extension, so the sources themselves are safe.
+clean_rendered_html() {
+  find . \( -name '*.pm' -o -name '*.pmd' -o -name '*.p' \) \
+    -not -path './.racket/*' -not -path '*/compiled/*' -print0 |
+    while IFS= read -r -d '' source; do
+      case "$source" in
+        *.pm)  rm -f -- "${source%.pm}" ;;
+        *.pmd) rm -f -- "${source%.pmd}" ;;
+        *.p)   rm -f -- "${source%.p}" ;;
+      esac
+    done
+}
+trap clean_rendered_html EXIT INT TERM
 
 if command -v raco >/dev/null 2>&1; then
   raco pollen start "$@"

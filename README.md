@@ -16,9 +16,14 @@ The first run downloads Pollen into the project-local `.racket/` directory
 | File | What it is |
 | --- | --- |
 | `index.html.pm` | Landing page. Add a link here for each new post. |
-| `YYYY-MM-DD-title.html.pm` | A post, written in Markdown (`#lang pollen/markdown`). |
+| `posts/YYYY-MM-DD-title.html.pm` | A post, written in Markdown (`#lang pollen/markdown`). |
 | `template.html.p` | The shared HTML layout. `doc` is the current page's content. |
 | `styles.css` | Plain CSS. |
+
+Posts live in `posts/` and are served at `/posts/<name>` (clean URLs). Link to
+them from `index.html.pm` as `posts/2024-01-15-hello`. The root
+`template.html.p` and `pollen.rkt` apply to the subdirectory too — `build.sh`
+renders with `raco pollen render -s .` so the project root stays fixed.
 
 Because filenames sort chronologically, dated posts also appear in order in the
 project dashboard.

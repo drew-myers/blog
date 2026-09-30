@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #
 # Remove locally generated artifacts:
-#   - rendered HTML in the source tree (*.html)
-#   - Pollen's compile/render cache (compiled/)
+#   - rendered HTML in the source tree (root + subdirs)
+#   - Pollen compile/render caches (compiled/)
 #   - the assembled deploy directory (../blog-site)
 #
 # Keeps .racket/ (the project-local Racket package scope). Delete that by hand
@@ -13,7 +13,17 @@ cd "$(cd "$(dirname "$0")" && pwd)"
 
 site="${SITE:-../blog-site}"
 
-rm -f ./*.html
-rm -rf compiled "$site"
+find . \( -name '*.pm' -o -name '*.pmd' -o -name '*.p' \) \
+  -not -path './.racket/*' -not -path '*/compiled/*' -print0 |
+  while IFS= read -r -d '' source; do
+    case "$source" in
+      *.pm)  rm -f -- "${source%.pm}" ;;
+      *.pmd) rm -f -- "${source%.pmd}" ;;
+      *.p)   rm -f -- "${source%.p}" ;;
+    esac
+  done
 
-echo "Cleaned: *.html, compiled/, $site"
+find . -type d -name compiled -not -path './.racket/*' -prune -exec rm -rf -- {} +
+rm -rf -- "$site"
+
+echo "Cleaned: rendered HTML, compiled/, $site"
