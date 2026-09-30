@@ -73,3 +73,24 @@ extensionless URLs, so internal links work in both places.
 - If you ever need to *force* a file into the published site (e.g. a
   `.nojekyll` for GitHub Pages), add an `extra-path?` predicate alongside
   `omitted-path?` in `pollen.rkt`.
+
+## Version control
+
+This repo uses [Jujutsu](https://jj-vcs.github.io/jj/) (`jj`), **colocated**
+with Git — both `.jj/` and `.git/` exist, so git-based tools and editors still
+work. `jj` and `git` come from the Nix dev shell.
+
+```sh
+jj status                    # what's changed
+jj describe -m "Add a post"  # set the current change's message
+jj new                       # start the next change
+jj log                       # history
+```
+
+To publish the repo to a remote later:
+
+```sh
+jj git remote add origin git@github.com:you/blog.git
+jj bookmark set main -r @
+jj git push
+```
