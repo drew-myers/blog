@@ -15,6 +15,7 @@
       "template.html"
       "build.sh"
       "deploy.sh"
+      "clean.sh"
       "Makefile"
       "wrangler.jsonc"
       "wrangler.toml"))
