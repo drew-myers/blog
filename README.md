@@ -20,10 +20,15 @@ The first run downloads Pollen into the project-local `.racket/` directory
 | `template.html.p` | The shared HTML layout. `doc` is the current page's content. |
 | `styles.css` | Plain CSS. |
 
-Posts live in `posts/` and are served at `/posts/<name>` (clean URLs). Link to
-them from `index.html.pm` as `posts/2024-01-15-hello`. The root
-`template.html.p` and `pollen.rkt` apply to the subdirectory too — `build.sh`
-renders with `raco pollen render -s .` so the project root stays fixed.
+Posts live in `posts/`. Link to them from `index.html.pm` using the output
+name with its extension, e.g. `posts/2024-01-15-hello.html` — that is what the
+local Pollen preview server resolves (it does not rewrite extensionless URLs).
+On Cloudflare, `assets.html_handling` redirects the `.html` URL to the clean
+`/posts/2024-01-15-hello`, so the link works in both places.
+
+The root `template.html.p` and `pollen.rkt` apply to the subdirectory too —
+`build.sh` renders with `raco pollen render -s .` so the project root stays
+fixed.
 
 Because filenames sort chronologically, dated posts also appear in order in the
 project dashboard.
