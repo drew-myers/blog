@@ -16,6 +16,7 @@
       "build.sh"
       "deploy.sh"
       "clean.sh"
+      "preview.sh"
       "Makefile"
       "wrangler.jsonc"
       "wrangler.toml"))

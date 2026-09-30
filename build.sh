@@ -21,4 +21,8 @@ fi
 run raco pollen render .
 run raco pollen publish . "$site"
 
+# The rendered HTML now lives in $site; drop the in-tree copies so the source
+# tree stays tidy.
+rm -f ./*.html
+
 echo "Built: $site"

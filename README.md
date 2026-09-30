@@ -26,10 +26,12 @@ project dashboard.
 ## Preview
 
 ```sh
-raco pollen start        # live server at http://localhost:8080
+./preview.sh             # live server at http://localhost:8080
 ```
 
-Edit a source file and refresh the browser to see the change.
+Edit a source file and refresh the browser to see the change. Pollen renders
+in place, so this wrapper deletes the in-tree `*.html` when the server stops.
+Any args pass through (`./preview.sh . 9000`).
 
 ## Build
 
@@ -39,7 +41,8 @@ Edit a source file and refresh the browser to see the change.
 
 The deployable site lands in a **sibling** directory (`../blog-site`) because
 Pollen refuses to publish inside its own source tree. `build.sh` works either
-inside the Nix dev shell or standalone.
+inside the Nix dev shell or standalone, and removes the in-tree `*.html` after
+publishing so the source tree stays clean.
 
 Which files get copied is controlled by `omitted-path?` in `pollen.rkt`. It
 already omits dotfiles/dirs (`.racket`, `.git`), the flake, and the scripts, so
